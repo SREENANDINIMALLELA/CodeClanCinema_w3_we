@@ -15,7 +15,6 @@ class Screening
     @id= screening_time['id'].to_i
   end
 
-
   def self.all()
     sql = "SELECT * FROM screenings"
     values = []

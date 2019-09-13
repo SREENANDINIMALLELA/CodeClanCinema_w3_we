@@ -32,7 +32,7 @@ class Film
    customers_for_film.map{|customer|customer['count']}[0].to_i
   end
   def busy_screening_hours()
-    sql ="select count(tickets.film_id)AS film , screenings.screening_time from tickets inner join screenings on tickets.screening_id = screenings.id where tickets.film_id = $1 group by screenings.screening_time order by count DESC limit 1;"
+    sql ="select count(tickets.film_id) , screenings.screening_time from tickets inner join screenings on tickets.screening_id = screenings.id where tickets.film_id = $1 group by screenings.screening_time order by count DESC limit 1;"
     values= [@id]
   busy_screening_hours = SqlRunner.run(sql, values)
   return busy_screening_hours.map{|busy_hours|busy_hours['screening_time']}[0]

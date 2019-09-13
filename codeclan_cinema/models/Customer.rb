@@ -31,8 +31,13 @@ class Customer
     values = [@id]
     remaining_fund = SqlRunner.run(sql, values)
     result = @funds-remaining_fund.map{|fund|fund['price']}[0].to_i
-
    return result
+  end
+  def tickets_bought()
+    sql="SELECT COUNT(tickets.customer_id) FROM tickets WHERE customer_id = $1"
+    values = [@id]
+    tickets_bought= SqlRunner.run(sql, values)
+    return tickets_bought.map{|bought|bought['count']}[0].to_i
   end
   def self.all()
     sql = "SELECT * FROM customers"
